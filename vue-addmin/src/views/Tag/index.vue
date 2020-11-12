@@ -1,5 +1,5 @@
 <template>
-
+<v-container>
   <div>
     <v-text-field outlined v-model="search" append-icon="mdi-magnify" label="Search" single-line
                   hide-details></v-text-field>
@@ -51,6 +51,9 @@
     </v-data-table>
 
   </div>
+
+</v-container>
+
 </template>
 
 <script>

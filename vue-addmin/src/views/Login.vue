@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app id="inspire" style="background-image: url('./src./assets/admin.jpg)">
     <v-main class="">
       <v-container
           class="fill-height"

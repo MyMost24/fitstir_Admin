@@ -1,40 +1,125 @@
 <template>
-  <v-content>
     <v-container>
-      <h1>Create Challenge</h1>
-      <v-card class="t-p-8" v-if="" flat>
+<!--      <v-card class="t-p-8" v-if="" flat>-->
 
-        <img id="imageid" class=" t-h-32 t-w-64" :src="selectedImage" ref="image" style="width: 300px;" alt=""><br>
+<!--        <img id="imageid" class=" t-h-32 t-w-64" :src="selectedImage" ref="image" style="width: 300px;" alt=""><br>-->
 
-        <div>
-          <v-btn color="primary" class="text-none my-1" rounded depressed :loading="isSelecting" @click="onButtonClickImage">
-            <v-icon left>
-              mdi-file-image
-            </v-icon>
-            Upload image
+<!--        <div>-->
+<!--          <v-btn color="primary" class="text-none my-1" rounded depressed :loading="isSelecting" @click="onButtonClickImage">-->
+<!--            <v-icon left>-->
+<!--              mdi-file-image-->
+<!--            </v-icon>-->
+<!--            Upload image-->
 
 
-          </v-btn>
-          <input ref="imageuploader" class="d-none" type="file" accept="image/jpeg,image/jpg,image/*" @change="onSelectImage">
+<!--          </v-btn>-->
+<!--          <input ref="imageuploader" class="d-none" type="file" accept="image/jpeg,image/jpg,image/*" @change="onSelectImage">-->
+<!--        </div>-->
+
+<!--        <br>-->
+
+<!--        <v-text-field outlined label="name" type="text" v-model="form.name"/>-->
+<!--        <v-textarea outlined label="description" type="text" v-model="form.description"/>-->
+
+<!--        <v-card-actions>-->
+<!--          <div class="t-w-full">-->
+<!--            <v-btn class="t-float-right" large dark @click="createChallenge()" color="primary">-->
+<!--              <v-icon>mdi-playlist-plus</v-icon> Create-->
+<!--            </v-btn>-->
+<!--          </div>-->
+<!--        </v-card-actions>-->
+<!--      </v-card>-->
+
+
+
+
+      <div class="container flex flex-col justify-center items-center mx-auto " >
+        <div
+                style="background-image: url()"
+                class=" bg-blue-300 h-64 w-24 min-w-full
+                rounded-lg shadow-md bg-cover bg-center"
+        >
         </div>
+        <div class="w-full  -mt-24  lg:w-8/12 px-7  justify-center ">
+          <div class="relative flex flex-col min-w-0 break-words  mb-6 shadow-lg rounded-lg bg-gray-200 border-0">
+            <div class="rounded-t bg-white mb-0 px-6 py-6">
+              <div class="text-center flex justify-between">
+                <h6 class="text-gray-800 text-3xl">Create Challenge</h6>
+                <v-btn
+                        @click="createChallenge()"
+                        class="ma-2"
+                        outlined
+                        color="indigo"
+                >
+                  Create
+                </v-btn>
+              </div>
+            </div>
+            <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
+              <h6 class="text-gray-500 text-sm mt-3 mb-6 font-bold uppercase">
+                Challenge Information
+              </h6>
+              <img id="imageid" class=" t-h-32 t-w-64" :src="selectedImage" ref="image" style="width: 300px;" alt=""><br>
+              <div>
+                <v-btn color="primary" class="text-none my-1" rounded depressed :loading="isSelecting" @click="onButtonClickImage">
+                  <v-icon left>
+                    mdi-file-image
+                  </v-icon>
+                  Upload image
+                </v-btn>
+                <input ref="imageuploader" class="d-none" type="file" accept="image/jpeg,image/jpg,image/*" @change="onSelectImage">
+              </div>
 
-        <br>
 
-        <v-text-field outlined label="name" type="text" v-model="form.name"/>
-        <v-textarea outlined label="description" type="text" v-model="form.description"/>
+              <hr class="mt-6 border-b-1 border-gray-400" />
+              <br>
+              <form>
+                <div class="flex flex-wrap">
+                  <div class="w-full lg:w-6/12 px-4">
+                    <div class="relative w-full mb-3">
+                      <label
+                              class="block uppercase text-gray-700 text-xs font-bold mb-2"
+                              htmlFor="grid-password"
+                      >
+                        Name
+                      </label>
+                      <input
+                              v-model=" form.name"
+                              type="text"
+                              class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
+                              value="lucky.jesse"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="flex flex-wrap">
+                  <div class="w-full lg:w-6/12 px-4">
+                    <div class="relative w-full mb-3">
+                      <label
+                              class="block uppercase text-gray-700 text-xs font-bold mb-2"
+                              htmlFor="grid-password"
+                      >
+                        Description
+                      </label>
+                      <textarea
+                              v-model="form.description"
+                              type="text"
+                              class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
+                              rows="4"
+                      >
 
-        <v-card-actions>
-          <div class="t-w-full">
-            <v-btn class="t-float-right" large dark @click="createChallenge()" color="primary">
-              <v-icon>mdi-playlist-plus</v-icon> Create
-            </v-btn>
+                  </textarea
+                  >
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
           </div>
-        </v-card-actions>
-      </v-card>
 
+        </div>
+      </div>
     </v-container>
-  </v-content>
-
 </template>
 
 <script>
@@ -93,9 +178,19 @@ export default {
     onSelectImage(e) {
       var files = e.target.files || e.dataTransfer.files;
       this.form.image = e.target.files[0]
-      this.selectedImage = URL.createObjectURL(e.target.files[0]);
+      if (!files.length)
+        return this.createImage(files[0]);
     },
+    createImage(file) {
+      this.selectedImage = new Image();
+      var reader = new FileReader();
+      var vm = this;
 
+      reader.onload = (e) => {
+        vm.selectedImage = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    },
     async createChallenge(){
       this.form.user = this.userProfile.pk
       let data = await this.$store.dispatch('challenge/createChallenge', this.form)

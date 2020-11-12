@@ -1,101 +1,60 @@
 <template>
-  <v-content>
     <v-container class="align-center" v-if="response">
-      <h2 >Challenge
-
-      </h2>
-
-      <v-btn color="info" @click="$router.push('/app/createchallenge/index')"
-             style="margin-top: 10px;"
-      >
-        <v-icon color="white">mdi-plus</v-icon>
-        Create Challenge
-      </v-btn>
-
-      <div
-          class="flex flex-wrap sm:-m-4 -mx-4 -mb-10  justify-center md:justify-start items-center md:items-start mt-8">
-        <div style="width:300px;" >
-          <v-layout class="row">
-            <v-flex md6 xs12 v-for="list,index in CHALLENGELISTS" :key="index">
-              <v-card class="p-4  w-full  justify-center items-center"
-                      @click="$router.push(`/app/challenge/index?id=${list.id}`)">
-
-                <img style="height:200px; width:200px;" v-if="list.image" :src="list.image" alt="">
-                <div class="">{{ list.name }}</div>
+      <div class="container flex flex-col justify-center items-center mx-auto " >
+        <div
+                style="background-image: url(https://images.unsplash.com/photo-1538582709238-0a503bd5ae04?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80)"
+                class=" bg-blue-300 h-64 w-24 min-w-full
+                rounded-lg shadow-md bg-cover bg-center"
+        >
+        </div>
+        <div class="bg-white -mt-24 shadow-md rounded-lg overflow-hidden">
+          <div class="items-center justify-between py-10 px-5 bg-white shadow-2xl rounded-lg mx-auto text-center">
+            <div class="px-2 -mt-6">
+              <div class="text-center">
+                <h6 class="text-gray-800 text-5xl font-bold">Exercise Challenge</h6>
+                <h2 class="text-gray-800 text-3xl font-bold">
+                  Make Your Day
+                </h2>
+                <h2 class="text-gray-800 text-1xl font-bold">
+                  Real People. Real Videos.
+                </h2>
+                <br>
                 <v-btn
-                    color="red"
-                    @click="getdataDialogid(list.id)"
+                        @click="$router.push('/app/createchallenge/index')"
+                        color="error"
+                        x-large
                 >
-                  <v-icon color="white">mdi-cog-outline</v-icon>
+                  <v-icon>mdi-plus</v-icon>
+                  Create Challenge
                 </v-btn>
-
-              </v-card>
-            </v-flex>
-          </v-layout>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+              style="width:300px;"
+              v-for="list,index in CHALLENGELISTS" :key="index"
+              @click="$router.push(`/app/challenge/index?id=${list.id}`)"
+              class=" max-w-xs rounded overflow-hidden shadow-lg my-2  justify-items-auto"
+      >
+        <img width="300" height="300"
+             v-if="list.image" :src="list.image" alt="">
+        <div class="px-6 py-4">
+          <div class="font-bold text-xl mb-2">{{ list.name }}t</div>
+          <div class=" text-lg">{{ list.description }}t</div>
         </div>
       </div>
 
-      <v-dialog
-          v-model="dialog"
-          max-width="350"
-      >
-        <v-card>
-          <v-card-title class="headline"> Setting Playlsit Video</v-card-title>
-          <v-form>
-            <v-container>
-              <v-layout justify-center items-center>
-                <v-flex row>
-                  <v-btn
-                      class="pa-md-5 mx-lg-auto"
-                      width="300"
-                      color="green"
-                      @click="$router.push(`/Addvideoplaylist?id=${dataDialog}`)"
-                  >
-                    <v-icon
-                    >
-                      mdi-folder-multiple-plus
-                    </v-icon>
-                    ADD Video
-                  </v-btn>
-                  <v-btn
-                      class="pa-md-5 mx-lg-auto mt-2"
-                      width="300"
-                      color="primary"
-                      @click="$router.push(`/playlistpage?id=${dataDialog}`)"
-                  >
-                    <v-icon>mdi-eye</v-icon>
-                    My playlist
-                  </v-btn>
-                  <v-btn
-                      class="pa-md-5 mx-lg-auto mt-2"
-                      width="300"
-                      color="red"
-                      @click="deletePlaylist()"
-                  >
-                    Remove Playlist
-                  </v-btn>
-                </v-flex>
-              </v-layout>
-            </v-container>
-          </v-form>
-        </v-card>
-      </v-dialog>
-
-
-
     </v-container>
-  </v-content>
 </template>
 
 <script>
 import {call, sync} from 'vuex-pathify'
-
 export default {
   name: "index",
   data: () => ({
     response: false,
-    dataDialog:null,
-    dialog : false,
 
 
   }),
@@ -113,10 +72,6 @@ export default {
       this.CHALLENGELISTS = this.challenge
       console.log(this.CHALLENGELISTS)
       this.response = true
-    },
-    async getdataDialogid(id) {
-      this.dialog = true
-      this.dataDialog = id
     },
 
 

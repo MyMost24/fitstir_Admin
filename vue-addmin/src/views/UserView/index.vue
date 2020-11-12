@@ -1,5 +1,4 @@
 <template>
-  <v-content>
     <v-container>
       <v-toolbar color="transparent" flat>
         <h2 class="text-3xl">
@@ -15,12 +14,11 @@
 
       <v-tabs v-model="tab" color="blue" slider-color="primary">
         <v-tab>
-          ผู้ใช้
+          User
         </v-tab>
         <v-tab-item>
 
           <div  class="t-p-10" >
-            <h1>User</h1>
             <div  class="t-p-10" v-if="response">
               <v-text-field class="t-mt-4" outlined v-model="search" append-icon="mdi-magnify" label="ค้นหา" single-line hide-details></v-text-field>
               <br>
@@ -58,11 +56,10 @@
           </div>
         </v-tab-item>
         <v-tab>
-          แอดมิน
+          Admin
         </v-tab>
         <v-tab-item>
           <div  class="t-p-10" >
-            <h1>Admin</h1>
             <div  class="t-p-10" v-if="response">
               <v-text-field class="t-mt-4" outlined v-model="search" append-icon="mdi-magnify" label="ค้นหา" single-line hide-details></v-text-field>
               <br>
@@ -102,10 +99,7 @@
           </div>
         </v-tab-item>
       </v-tabs>
-
     </v-container>
-  </v-content>
-
 </template>
 
 <script>
@@ -114,7 +108,7 @@ export default {
   name: "index",
   data: () => ({
     response : false,
-    head: "สมาชิก",
+    head: "Register",
     txt: "Hello World",
     tab: 0,
     search: '',

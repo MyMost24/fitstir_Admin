@@ -14,6 +14,7 @@ if (localStorage.getItem('access_token')) {
   window.axios.defaults.headers.common['Authorization'] = `Token ${localStorage.getItem('access_token')}`;
 }
 
+Vue.prototype.$url = 'http://192.168.1.144:8000'
 
 new Vue({
   vuetify,

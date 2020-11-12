@@ -9,7 +9,7 @@ import spinner from "./spinner"
 import success from "./success"
 import playlist from "./playlist"
 import challenge from "@/store/challenge";
-import videochallenge from "@/store/videochallenge";
+import videochallenge from "./videochallenge";
 
 Vue.use(Vuex)
 const modules = {

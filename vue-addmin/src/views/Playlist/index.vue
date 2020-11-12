@@ -1,10 +1,7 @@
 <template>
-
-  <v-content>
     <v-container>
-
       <div v-if="response">
-        <h1>Play List</h1>
+        <p class="text-4xl">Play List</p>
         <v-text-field outlined v-model="search" append-icon="mdi-magnify" label="Search" single-line
                       hide-details></v-text-field>
         <br>
@@ -20,9 +17,13 @@
 
               <td class="t-w-64  t-p-4">
                 <div class="t-w-full t-flex t-flex-row t-items-center w3-medium ">
-                  <img width="60" height="60" :src="'http://localhost:8000'+ playlist.image" alt="">
-                  {{ playlist.name }}
+                  <img width="150" height="150" :src="$url+ playlist.image" alt="">
+
+
                 </div>
+              </td>
+              <td>
+                {{ playlist.name }}
               </td>
 
               <td>
@@ -48,12 +49,8 @@
             </tbody>
           </template>
         </v-data-table>
-
       </div>
-
     </v-container>
-  </v-content>
-
 </template>
 
 
@@ -75,6 +72,10 @@ export default {
         text: 'play',
         value: 'playlist'
 
+      },
+      {
+        text: 'Name',
+        value: 'name',
       },
       {
         text: 'setting',

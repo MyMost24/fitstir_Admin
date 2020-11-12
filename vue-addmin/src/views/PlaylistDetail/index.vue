@@ -1,46 +1,95 @@
 <template>
-  <v-content>
     <v-container>
       <v-tabs color="primary" class="mt-4" slider-color="primary">
         <v-tab>
           ข้อมูลทั่วไป
         </v-tab>
         <v-tab-item>
-          <h1>Playlist Detail</h1>
-          <v-card class="t-p-8" v-if="" flat>
 
-            <img crossorigin="anonymous" style="height: 300px;" id="imageid"
-                 v-if="PLAYLISTCHOOSE.image" class=" t-h-32 t-w-64"
-                 :src="'http://localhost:8000'+ PLAYLISTCHOOSE.image"
-                 ref="image" alt=""><br>
+          <div class="container flex flex-col justify-center items-center mx-auto " >
+            <div class="w-full lg:w-8/12 px-7  items-center ">
+              <div class="relative flex flex-col min-w-0 break-words  mb-6 shadow-lg rounded-lg bg-gray-200 border-0">
+                <div class="rounded-t bg-white mb-0 px-6 py-6">
+                  <div class="text-center flex justify-between">
+                    <h6 class="text-gray-800 text-4xl  ">Playlist Edit</h6>
+                    <v-btn
+                            @click="updatePlaylist()"
+                            class="ma-2"
+                            outlined
+                            color="indigo"
+                    >
+                      Save
+                    </v-btn>
+                  </div>
+                </div>
+                <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
+                  <h6 class="text-gray-500 text-sm mt-3 mb-6 font-bold uppercase">
+                    Playlist Detail
+                  </h6>
+                  <img crossorigin="anonymous" style="height: 300px;" id="imageid"
+                       v-if="PLAYLISTCHOOSE.image" class=" t-h-32 t-w-64"
+                       :src="$url+ PLAYLISTCHOOSE.image"
+                       ref="image" alt=""><br>
 
-            <input accept="image/jpeg,image/jpg,image/*" type="file" id="fileUpload" ref="file"
-                   v-on:change="handleFileUpload()"/>
-            <br><br>
+                  <input accept="image/jpeg,image/jpg,image/*" type="file" id="fileUpload" ref="file"
+                         v-on:change="handleFileUpload()"/>
+                  <br><br>
 
-            <v-text-field outlined label="ชื่อ playlist" type="text" v-model="PLAYLISTCHOOSE.name"/>
-            <v-textarea outlined label="รายระเอียด" type="text" v-model="PLAYLISTCHOOSE.description"/>
+                  <form>
+                    <div class="flex flex-wrap">
+                      <div class="w-full lg:w-6/12 px-4">
+                        <div class="relative w-full mb-3">
+                          <label
+                                  class="block uppercase text-gray-700 text-xs font-bold mb-2"
+                                  htmlFor="grid-password"
+                          >
+                            Name
+                          </label>
+                          <input
+                                  v-model="PLAYLISTCHOOSE.name"
+                                  type="text"
+                                  class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
+                                  value="lucky.jesse"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="flex flex-wrap">
+                      <div class="w-full lg:w-6/12 px-4">
+                        <div class="relative w-full mb-3">
+                          <label
+                                  class="block uppercase text-gray-700 text-xs font-bold mb-2"
+                                  htmlFor="grid-password"
+                          >
+                            Detail
+                          </label>
+                          <textarea
+                                  v-model="PLAYLISTCHOOSE.description"
+                                  type="text"
+                                  class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
+                                  rows="4"
+                          >
 
-            <v-card-actions>
-              <div class="t-w-full">
-                <v-btn class="t-float-right" large dark @click="updatePlaylist()" color="primary">
-                  <v-icon>mdi-playlist-plus</v-icon>
-                  Edit Playlist
-                </v-btn>
+                  </textarea
+                  >
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
               </div>
-            </v-card-actions>
-          </v-card>
+            </div>
+          </div>
+
         </v-tab-item>
         <v-tab>
           รายการวีดีโอ
         </v-tab>
         <v-tab-item>
-
-          <h1>
+          <p class=" text-4xl">
             Add video Playlist
-          </h1>
+          </p>
           <br>
-
           <v-dialog
               v-model="dialog1"
               fullscreen
@@ -99,7 +148,6 @@
           </v-dialog>
           <br>
 
-
           <v-data-table
               :headers="headers1"
               :items="videoplaylist"
@@ -108,7 +156,7 @@
               <tbody>
               <tr v-for="list,index in items" :key="index">
                 <td>
-                  <img :src="'http://localhost:8000'+list.video.image" alt="" width="100" height="100">
+                  <img :src="$url+list.video.image" alt="" width="100" height="100">
                 </td>
                 <td class="w3-large">{{ list.video.name }}</td>
                 <td>
@@ -129,12 +177,80 @@
               </tbody>
             </template>
           </v-data-table>
+          <div
+                  class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded"
+          >
+            <div class="rounded-t mb-0 px-4 py-3 border-0">
+              <div class="flex flex-wrap items-center">
+                <div class="relative w-full px-4 max-w-full flex-grow flex-1">
+                  <h3 class="font-semibold text-lg"
+                  >
+                    Add video Playlist
+                  </h3>
+                </div>
+              </div>
+            </div>
+            <div class="block w-full overflow-x-auto">
+              <table
+                      class="items-center w-full bg-transparent border-collapse"
+                      :headers="headers1"
+                      :items="videoplaylist"
+              >
+                <thead >
+                <tr>
+                  <th
+                          class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0
+                          border-r-0 whitespace-no-wrap font-semibold text-left"
+                          >
+                    Image
+                  </th>
+                  <th
+                          class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0
+                          border-r-0 whitespace-no-wrap font-semibold text-left"
+                  >
+                    Name
+                  </th>
+                  <th
+                          class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0
+                          border-r-0 whitespace-no-wrap font-semibold text-left"
+                  >
+                    Play
+                  </th>
+                  <th
+                          class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0
+                          border-r-0 whitespace-no-wrap font-semibold text-left"
+                  >
+                    Manage
+                  </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr
+                >
+                  <th>
+
+                  </th>
+                  <th>
+
+                  </th>
+                  <th>
+
+                  </th>
+                  <th>
+
+                  </th>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
         </v-tab-item>
       </v-tabs>
 
       <v-dialog
           v-model="dialog"
           v-if="videoData"
+          width="650px"
       >
         <v-card>
           <v-card-title>
@@ -144,21 +260,22 @@
             <v-btn @click="dialog = false">X</v-btn>
           </v-card-title>
           <video style="width:100%;" controls autoplay v-if="videoData.video"
-                 :src="'http://localhost:8000'+videoData.video.video"></video>
+                 :src="$url+videoData.video.video"></video>
         </v-card>
       </v-dialog>
 
 
     </v-container>
-  </v-content>
 </template>
 
 <script>
 import {call, sync} from 'vuex-pathify'
 import swal from "sweetalert2";
+import Template from "../CreateChallenge/Template";
 
 export default {
   name: "index",
+  components: {Template},
   data: () => ({
     response: false,
     videoplaylist: [],
@@ -247,7 +364,11 @@ export default {
       console.log(this.PLAYLISTCHOOSE.image)
       await this.$store.dispatch('playlist/updatePlaylist', this.PLAYLISTCHOOSE)
       if (!false) {
-        await alert('Update Success')
+        await swal.fire(
+                'สำเร็จ',
+                'เพิ่มวิดีโอสำเร็จเเล้ว',
+                'success'
+        )
         await this.$router.push('/app/playlists/playlist')
       }
 
